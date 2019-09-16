@@ -22,7 +22,22 @@
         // $("#gif-sect").text(JSON.stringify(response));
         console.log(response);
         });
-    
+        
+
+        var topics = ["Animals", "Cars"];
+
+        function renderButtons() {
+
+            $("#btn-sect").empty();
+
+            for (var i = 0; i < topics.length; i++) {
+
+                var btn = $("<button>");
+                btn.text(topics[i]);
+                $("#btn-sect").append(btn);
+            }
+        }
+        renderButtons()
     
     </script>
     
