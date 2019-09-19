@@ -12,19 +12,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-        // var APIKey = "KfgAtbpxw38tVhiJfO8ET62Z3Hbz1ukO";
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=KfgAtbpxw38tVhiJfO8ET62Z3Hbz1ukO&q=animal&limit=10&offset=0&rating=PG&lang=en";
+       
 
-        $.ajax({
-        url: queryURL,
-        method: "GET"
-        }).then(function(response) {
-        // $("#gif-sect").text(JSON.stringify(response));
-        console.log(response);
-        });
-        
-
-        var topics = ["Animals", "Cars"];
+        var topics = ["Dogs", "Cats", "Turtle", "Alpaca"];
 
         function renderButtons() {
 
@@ -34,11 +24,48 @@
 
                 var btn = $("<button>");
                 btn.text(topics[i]);
+                btn.attr("id", topics[i]);
+                btn.attr("topics", topics[i]);
                 $("#btn-sect").append(btn);
             }
+
         }
         renderButtons()
+
+        
+        
+        $("button").on("click", function() {
+            var topicchoice = $(this).attr("topics");
+            $("#gif-sect").text(topicchoice);
+            console.log(topicchoice);
+
+            var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=KfgAtbpxw38tVhiJfO8ET62Z3Hbz1ukO&q=" + topicchoice +"&limit=10&offset=0&rating=PG&lang=en";
+
+            $.ajax({
+            url: queryURL,
+            method: "GET"
+            }).then(function(response) {
+            // $("#gif-sect").text(JSON.stringify(response));
+            console.log(response.data);
+            });
+
+        })
     
+        // $(".gif").on("click", function() {
+        // // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+        // var state = $(this).attr("data-state");
+        // // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+        // // Then, set the image's data-state to animate
+        // // Else set src to the data-still value
+        // if (state === "still") {
+        //     $(this).attr("src", $(this).attr("data-animate"));
+        //     $(this).attr("data-state", "animate");
+        // } else {
+        //     $(this).attr("src", $(this).attr("data-still"));
+        //     $(this).attr("data-state", "still");
+        // }
+        // });
+
     </script>
     
 </body>
