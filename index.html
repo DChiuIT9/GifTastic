@@ -36,7 +36,6 @@
         
         $("button").on("click", function() {
             var topicchoice = $(this).attr("topics");
-            $("#gif-sect").text(topicchoice);
             console.log(topicchoice);
 
             var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=KfgAtbpxw38tVhiJfO8ET62Z3Hbz1ukO&q=" + topicchoice +"&limit=10&offset=0&rating=PG&lang=en";
@@ -46,8 +45,30 @@
             method: "GET"
             }).then(function(response) {
             // $("#gif-sect").text(JSON.stringify(response));
-            console.log(response.data);
+                console.log(response.data);
+
+                $("#gif-sect").empty();
+
+                var results = response.data;
+
+                for (var t = 0; t < results.length; t++) {
+
+                    var p = $("<p>")
+
+                    p.text("Rating: " + results[t].rating);
+
+                    var resultImage = $("<img>");
+                    resultImage.attr("src", results[t].images.fixed_height_still.url);
+
+                    $("#gif-sect").append(p);
+
+                    $("#gif-sect").append(resultImage);
+
+                    console.log(resultImage);
+                }
             });
+
+            // $("#gif-sect").text(topicchoice);
 
         })
     
