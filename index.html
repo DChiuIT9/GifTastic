@@ -8,6 +8,10 @@
 </head>
 <body>
     <div id="btn-sect"></div>
+    <div id="add-btn-sect">
+        <input id="submit-btn" type="submit" style="float:right">
+        <input id="user-input" type="text" style="float:right">
+    </div>
     <div id="gif-sect"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -31,6 +35,8 @@
 
         }
         renderButtons()
+
+
 
         
         
@@ -59,31 +65,51 @@
 
                     var resultImage = $("<img>");
                     resultImage.attr("src", results[t].images.fixed_height_still.url);
+                    resultImage.attr("data-state", "still");
+                    resultImage.attr("img-still", results[t].images.fixed_height_still.url);
+                    resultImage.attr("img-animate", results[t].images.fixed_height.url);
+                    resultImage.attr("gif");
 
                     $("#gif-sect").append(p);
 
                     $("#gif-sect").append(resultImage);
 
                     console.log(resultImage);
+                    console.log(resultImage.attr("img-still"));
+
+                    
                 }
-            });
+                // $(this).on("click", function() {
+                // var state = $(this).attr("data-state");
+                // var stillUrl = $(this).attr("img-still");
+                // var animateUrl = $(this).attr("img-animate");
+                // console.log(state);
+                // })
+                
+                
+            })
 
         })
-    
-        // $(".gif").on("click", function() {
-        // // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+
         // var state = $(this).attr("data-state");
-        // // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-        // // Then, set the image's data-state to animate
-        // // Else set src to the data-still value
+        // var stillUrl = $(this).attr("img-still");
+        // var animateUrl = $(this).attr("img-animate");
+    
+        $(this).on("click", function() {
+        var state = $(this).attr("data-state");
+        var stillUrl = $(this).attr("img-still");
+        var animateUrl = $(this).attr("img-animate");
         // if (state === "still") {
-        //     $(this).attr("src", $(this).attr("data-animate"));
+        //     $(this).attr("src", animateUrl);
         //     $(this).attr("data-state", "animate");
         // } else {
-        //     $(this).attr("src", $(this).attr("data-still"));
+        //     $(this).attr("src", stillUrl);
         //     $(this).attr("data-state", "still");
         // }
-        // });
+        console.log(state);
+
+
+        });
 
     </script>
     
